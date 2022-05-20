@@ -1,8 +1,14 @@
 import React from "react";
-import { Asset } from './components/Asset';
+import { Menu } from "./components/Menu";
+import { Total } from "./components/Total";
+import { AssetList } from './components/AssetList';
+import { GlobalStyle } from "./GlobalStyles";
 
 export const App = () => (
   <div>
-    <Asset />
+    <Menu />
+    <Total />
+    <GlobalStyle />
+    <AssetList />
   </div>
 )

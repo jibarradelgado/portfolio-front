@@ -1,5 +1,6 @@
 import React from "react";
-import { MainContainer, InfoContainer, ButtonContainer, Paragraph } from "./styles";
+import { MainContainer, InfoContainer, ButtonContainer, Paragraph, EditButton, DeleteButton } from "./styles";
+import { FaTrashAlt, FaPen } from "react-icons/fa";
 
 export const Asset = ({ name = "Default", value = 1000 }) => (
   <MainContainer>
@@ -9,8 +10,8 @@ export const Asset = ({ name = "Default", value = 1000 }) => (
       <Paragraph>100%</Paragraph>
     </InfoContainer>
     <ButtonContainer>
-      <button>Edit</button>
-      <button>Delete</button>
+      <EditButton><FaPen /></EditButton>
+      <DeleteButton><FaTrashAlt /></DeleteButton>
     </ButtonContainer>
   </MainContainer>
 );
