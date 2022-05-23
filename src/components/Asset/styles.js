@@ -1,6 +1,8 @@
 import styled from 'styled-components'
+import { fadeIn } from '../../styles/Animation';
 
 export const MainContainer = styled.div`
+  ${fadeIn()};
   max-width: 110px;
   width: 33.3vw;
 `
