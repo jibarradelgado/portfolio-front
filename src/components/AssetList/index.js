@@ -1,13 +1,25 @@
 import React from 'react';
 import { Asset } from '../Asset';
 import { List, Item } from './styles';
+import { EJSON } from 'bson';
 
-export const AssetList = () => {
+export const AssetList = ({assets}) => {
+
+  const renderList = () => {
+    let sum = 0;
+    assets.forEach(asset => sum = EJSON.parse(asset.value) + sum);
+    console.log(sum);
+
+    return (
+      <List>
+        {
+          assets.map(asset => <Item key={asset._id}><Asset name={asset.name} value={EJSON.parse(asset.value)} percentaje={(EJSON.parse(asset.value) * 100 / sum).toFixed(2)}/></Item>)
+        }
+      </List>
+    );
+  };
+
   return (
-    <List>
-      {
-        [1, 2, 3, 4, 5, 6].map(asset => <Item key={asset}><Asset /></Item>)
-      }
-    </List>
-  )
+    renderList()
+  );
 }

@@ -1,18 +1,28 @@
-import React from 'react';
+import React, { Fragment, useState } from 'react';
 import { MainContainer, MenuContainer } from './styles';
 import { FaPlus } from "react-icons/fa";
+import { AssetForm } from '../AssetForm';
 
 export const Menu = () => {
+  const [showForm, setShowForm] = useState(false);
+
+  const showFormClick = () => {
+    setShowForm(!showForm);
+  }
+
   return (
-    <MainContainer>
-      <MenuContainer>
-        <button id="addAssetButton"><FaPlus/></button>
-        <label for="addAssetButton">Add Asset</label>
+    <Fragment>
+      <MainContainer>
+        <MenuContainer>
+          <button id="addAssetButton" onClick={showFormClick} ><FaPlus/></button>
+          <label for="addAssetButton">Add Asset</label>
       </MenuContainer>
-      <MenuContainer>
+      {/* <MenuContainer>
         <button id="addTypeButton"><FaPlus/></button>
         <label for="addTypeButton">Add Type</label>
-      </MenuContainer>
-    </MainContainer>
+      </MenuContainer> */}
+      </MainContainer>
+      {showForm && <AssetForm showForm={showForm} setShowForm={setShowForm}/>}
+    </Fragment>
   );
 };

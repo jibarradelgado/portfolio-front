@@ -19,7 +19,8 @@ export const GlobalStyle = createGlobalStyle`
     list-style: none;
   }
 
-  button {
+  button,
+  input[type="submit"] {
     padding: 5px 18px;
     margin: 0 5px;
     text-align: center;
@@ -27,7 +28,10 @@ export const GlobalStyle = createGlobalStyle`
     border-radius: 25px;
     border: 0;
     outline: 0;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    &:active {
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.2) inset;
+    }
   }
 
   body {
@@ -44,5 +48,30 @@ export const GlobalStyle = createGlobalStyle`
     overflow-x: hidden;
     min-height: 100vh;
     padding-bottom: 10px;
+  }
+
+  .form-group {
+    display: flex;
+    margin: 10px 0;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .form-group label {
+    display: inline-block;
+    min-width: 75px;
+    padding: 5px 15px;
+    text-align: right;
+  }
+
+  .form-group input[type="text"],
+  .form-group input[type="number"] {
+    width: 150px;
+    height: 25px;
+    padding: 0 10px;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    font-size: 1rem;
   }
 `;
