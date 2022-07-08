@@ -3,7 +3,7 @@ import { Asset } from '../Asset';
 import { List, Item } from './styles';
 import { EJSON } from 'bson';
 
-export const AssetList = ({assets}) => {
+export const AssetList = ({ isChanged, setIsChanged, assets}) => {
 
   const renderList = () => {
     let sum = 0;
@@ -13,7 +13,7 @@ export const AssetList = ({assets}) => {
     return (
       <List>
         {
-          assets.map(asset => <Item key={asset._id}><Asset name={asset.name} value={EJSON.parse(asset.value)} percentaje={(EJSON.parse(asset.value) * 100 / sum).toFixed(2)}/></Item>)
+          assets.map(asset => <Item key={asset._id}><Asset id={asset._id} name={asset.name} value={EJSON.parse(asset.value)} percentaje={(EJSON.parse(asset.value) * 100 / sum).toFixed(2)} isChanged={isChanged} setIsChanged={setIsChanged}/></Item>)
         }
       </List>
     );

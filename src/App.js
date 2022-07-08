@@ -8,6 +8,7 @@ import { GlobalStyle } from "./styles/GlobalStyles";
 
 export const App = () => {
   const [ assets, setAssets ] = useState([]);
+  const [ isChanged, setIsChanged] = useState(false);
 
   useEffect(function() {
     window.fetch('http://localhost:3000/asset')
@@ -15,14 +16,14 @@ export const App = () => {
       .then(assets => {
         setAssets(EJSON.deserialize(assets.body))
       })
-  }, [])
+  }, [isChanged])
 
   return (
     <div>
-      <Menu />
+      <Menu isChanged={isChanged} setIsChanged={setIsChanged} />
       <Total assets={assets}/>
       <GlobalStyle />
-      <AssetList assets={assets}/>
+      <AssetList isChanged={isChanged} setIsChanged={setIsChanged} assets={assets}/>
     </div>
   );
 }

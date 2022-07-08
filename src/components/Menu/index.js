@@ -3,7 +3,7 @@ import { MainContainer, MenuContainer } from './styles';
 import { FaPlus } from "react-icons/fa";
 import { AssetForm } from '../AssetForm';
 
-export const Menu = () => {
+export const Menu = ({isChanged, setIsChanged}) => {
   const [showForm, setShowForm] = useState(false);
 
   const showFormClick = () => {
@@ -22,7 +22,7 @@ export const Menu = () => {
         <label for="addTypeButton">Add Type</label>
       </MenuContainer> */}
       </MainContainer>
-      {showForm && <AssetForm showForm={showForm} setShowForm={setShowForm}/>}
+      {showForm && <AssetForm showForm={showForm} setShowForm={setShowForm} isChanged={isChanged} setIsChanged={setIsChanged}/>}
     </Fragment>
   );
 };
