@@ -1,14 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import { MainContainer, InfoContainer, ButtonContainer, Paragraph, EditButton, DeleteButton } from "./styles";
 import { FaTrashAlt, FaPen } from "react-icons/fa";
+import { EJSON } from 'bson';
 import axios from 'axios';
 
-export const Asset = ({ id, name = "Default", value = 1000, percentaje = 100, isChanged, setIsChanged }) => {
+
+export const Asset = (props) => {
+  const asset = props.asset;
+  console.log(asset);
+
   const deleteAsset = () => {
-    axios.delete(`http://localhost:3000/asset/${id}`).
+    axios.delete(`http://localhost:3000/asset/${asset._id}`).
       then( res => {
         if (!res.error) {
-          setIsChanged(!isChanged);
+          props.setIsChanged(!props.isChanged);
         }
       });
   };
@@ -16,9 +21,9 @@ export const Asset = ({ id, name = "Default", value = 1000, percentaje = 100, is
   return (
     <MainContainer>
       <InfoContainer>
-        <Paragraph>{name}</Paragraph>
-        <Paragraph>{value}</Paragraph>
-        <Paragraph>{percentaje}%</Paragraph>
+        <Paragraph>{asset.name}</Paragraph>
+        <Paragraph>{EJSON.parse(asset.value)}</Paragraph>
+        <Paragraph>{props.percentaje}%</Paragraph>
       </InfoContainer>
       <ButtonContainer>
         <EditButton><FaPen /></EditButton>

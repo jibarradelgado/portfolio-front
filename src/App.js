@@ -23,7 +23,7 @@ export const App = () => {
       <Menu isChanged={isChanged} setIsChanged={setIsChanged} />
       <Total assets={assets}/>
       <GlobalStyle />
-      <AssetList isChanged={isChanged} setIsChanged={setIsChanged} assets={assets}/>
+      <AssetList isChanged={isChanged} setIsChanged={setIsChanged} assets={assets} setAssets={setAssets}/>
     </div>
   );
 }
