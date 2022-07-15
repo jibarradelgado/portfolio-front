@@ -33,8 +33,8 @@ export const Input = styled.input`
   text-align: center;
   margin-bottom: 5px;
   &:not([readOnly]) {
-    box-shadow: 3px 3px 5px 0px rgba(0,0,0,0.5);
-    /* outline: none; */
+    box-shadow: 3px 3px 5px 0px rgba(0,0,0,0.15);
+    outline: none;
   }
   &[type="number"] {
     padding-left: 15px;
