@@ -1,21 +1,19 @@
 import React, { useState } from "react";
 import { Container } from "./styles";
+import { useInputValue } from "../../hooks/useInputValue";
 import axios from 'axios';
 
 export const AssetForm = ({ showForm, setShowForm, isChanged, setIsChanged}) => {
-  const [ name, setName ] = useState('');
-  const [ value, setValue ] = useState(0);
+  const name =  useInputValue('')
+  const value = useInputValue(0);
 
   const handleSubmit = e => {
     e.preventDefault();
-    console.log(name);
-    console.log(value);
     axios.post(`http://localhost:3000/asset`, {
       "user": "623a36817ccde434ed0c0e77",
-      name,
-      value
+      name : name.value,
+      value : value.value
     }).then( res => {
-      console.log(res.error);
       if (!res.error) {
         setIsChanged(!isChanged);
         cancelForm();
@@ -24,8 +22,8 @@ export const AssetForm = ({ showForm, setShowForm, isChanged, setIsChanged}) => 
   }
 
   const cancelForm = () => {
-    setName('');
-    setValue('');
+    name.setValue('');
+    value.setValue(0);
     setShowForm(!showForm);
   }
 
@@ -35,11 +33,11 @@ export const AssetForm = ({ showForm, setShowForm, isChanged, setIsChanged}) => 
         <form onSubmit={handleSubmit}>
           <div className="form-group">
             <label for="asset_name">Name</label>
-            <input type="text" id="type_name" name="type_name" placeholder="Name" onChange={(e) => setName(e.target.value)} />
+            <input type="text" id="type_name" name="type_name" placeholder="Name" {...name} />
           </div>
           <div className="form-group">
             <label for="value">Value</label>
-            <input type="number" id="value" name="value" placeholder="0" onChange={(e) => setValue(e.target.value)} />
+            <input type="number" id="value" name="value" placeholder="0" {...value} />
           </div>
           <div className="form-group">
             <input type="submit" id="submit" value="Add" />

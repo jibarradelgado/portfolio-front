@@ -1,15 +1,14 @@
 import React, { useState } from "react";
 import { MainContainer, InfoContainer, ButtonContainer, Paragraph, Input, EditButton, DeleteButton } from "./styles";
 import { FaTrashAlt, FaPen, FaCheck, FaTimes  } from "react-icons/fa";
-import { EJSON } from 'bson';
+import { useInputValue } from "../../hooks/useInputValue";
 import axios from 'axios';
 
 
 export const Asset = (props) => {
   const asset = props.asset;
-  console.log(asset);
-  const [ name, setName ] = useState(asset.name);
-  const [ value, setValue ] = useState(EJSON.parse(asset.value));
+  const name = useInputValue(asset.name);
+  const value = useInputValue(asset.value);
   const [ isEditActive, setEditActive ] = useState(false);
 
   const deleteAsset = () => {
@@ -20,11 +19,11 @@ export const Asset = (props) => {
         }
       });
   };
-  
+
   const updateAsset = () => {
     axios.patch(`http://localhost:3000/asset/${asset._id}`,{
-    name,
-    value}).
+    name: name.value,
+    value: value.value}).
       then( res => {
         if (!res.error) {
           props.setIsChanged(!props.isChanged);
@@ -40,8 +39,8 @@ export const Asset = (props) => {
   return (
     <MainContainer>
       <InfoContainer>
-        <Input type="text" readOnly={!isEditActive} defaultValue={name} onChange={(e) => setName(e.target.value)} />
-        <Input type="number" readOnly={!isEditActive} defaultValue={value} onChange={(e) => setValue(e.target.value)} />
+        <Input type="text" readOnly={!isEditActive} {...name} />
+        <Input type="number" readOnly={!isEditActive} {...value} />
         <Paragraph>{props.percentaje}%</Paragraph>
       </InfoContainer>
       <ButtonContainer>

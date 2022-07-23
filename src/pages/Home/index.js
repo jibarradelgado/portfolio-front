@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import { EJSON } from 'bson';
-import { Menu } from "../components/Menu";
-import { Total } from "../components/Total";
-import { AssetList } from '../components/AssetList';
-import { GlobalStyle } from "../styles/GlobalStyles";
+import { Menu } from "../../components/Menu";
+import { Total } from "../../components/Total";
+import { AssetList } from '../../components/AssetList';
+import { Container } from './styles';
 
-export const HomePage = () => {
+export const Home = () => {
   const [ assets, setAssets ] = useState([]);
   const [ isChanged, setIsChanged] = useState(false);
 
@@ -18,11 +18,10 @@ export const HomePage = () => {
   }, [isChanged])
 
   return (
-    <div>
+    <Container>
       <Menu isChanged={isChanged} setIsChanged={setIsChanged} />
       <Total assets={assets}/>
-      <GlobalStyle />
       <AssetList isChanged={isChanged} setIsChanged={setIsChanged} assets={assets} setAssets={setAssets}/>
-    </div>
+    </Container>
   );
 }

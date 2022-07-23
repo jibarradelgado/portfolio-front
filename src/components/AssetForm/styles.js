@@ -6,3 +6,6 @@ export const Container = styled.div`
   align-items: center;
   justify-content: center;
 `
+export const Button = styled.button`
+  padding: 0 5px;
+`
