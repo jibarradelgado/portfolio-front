@@ -15,7 +15,8 @@ export const NotRegistered = () => {
       "username": email,
       "password": password
       }).then(res => {
-        activateAuth(res.body);
+        console.log(res);
+        activateAuth(res.data.body);
       })
     }
   }

@@ -1,11 +1,12 @@
-import React, { Fragment } from 'react';
+import React, { useContext, Fragment } from 'react';
 import { Link, Nav } from './styles';
 import { MdPersonOutline } from 'react-icons/md';
-import Context from "../../Context";
+import { Context } from "../../Context";
 
 const SIZE = '32px';
 
 export const NavBar = () => {
+  const { removeAuth } = useContext(Context);
   return (
     <Nav>
       <Context.Consumer>
@@ -14,7 +15,7 @@ export const NavBar = () => {
         isAuth ? 
           <Fragment>
             <Link to='/user'><MdPersonOutline size={SIZE} /></Link>
-            <Link to='/login'>Logout</Link>
+            <Link to='/' onClick={removeAuth}>Logout</Link>
           </Fragment>
         :
           <Fragment></Fragment>
