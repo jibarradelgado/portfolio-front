@@ -14,9 +14,11 @@ export const Menu = ({isChanged, setIsChanged}) => {
     <Fragment>
       <MainContainer>
         <MenuContainer>
-          <button id="addAssetButton" onClick={showFormClick} ><FaPlus/></button>
-          <label for="addAssetButton">Add Asset</label>
-      </MenuContainer>
+          <form onSubmit={e => {e.preventDefault()}} >
+            <button id="addAssetButton" onClick={showFormClick} ><FaPlus/></button>
+            <label for="addAssetButton">Add Asset</label>
+          </form>
+        </MenuContainer>
       {/* <MenuContainer>
         <button id="addTypeButton"><FaPlus/></button>
         <label for="addTypeButton">Add Type</label>

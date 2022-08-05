@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useImperativeHandle, useState } from 'react';
 import { Context } from '../../Context';
 import { UserForm } from '../../components/UserForm';
 import { Container } from './styles';
@@ -15,7 +15,6 @@ export const NotRegistered = () => {
       "username": email,
       "password": password
       }).then(res => {
-        console.log(res);
         activateAuth(res.data.body);
       })
     }
