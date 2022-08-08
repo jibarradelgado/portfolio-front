@@ -1,5 +1,5 @@
 import React, { createContext, useState } from 'react';
-import { getUser } from './auth';
+import { getUser, getAuth } from './auth';
 export const Context = createContext();
 
 const Provider = ({ children }) => {
@@ -13,21 +13,32 @@ const Provider = ({ children }) => {
     }
     return user;
   });
+  const [authId, setAuthId] = useState(() => {
+    let authId;
+    if(isAuth) {
+      authId = getAuth(isAuth);
+    }
+    return authId;
+  });
 
   const value = {
     isAuth,
     userId,
+    authId,
     activateAuth: (token) => {
-      setIsAuth(true);
+      setIsAuth(token);
       window.sessionStorage.setItem('token', token);
       const user = getUser(token);
+      const authId = getAuth(token);
       setUserId(user);
+      setAuthId(authId);
     },
 
     removeAuth: () => {
-      setIsAuth(false);
+      setIsAuth('');
       window.sessionStorage.removeItem('token');
       setUserId("");
+      setAuthId("");
     }
   }
 
