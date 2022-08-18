@@ -1,18 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { MainContainer, InfoContainer, ButtonContainer, Paragraph, Input, EditButton, DeleteButton } from "./styles";
 import { FaTrashAlt, FaPen, FaCheck, FaTimes  } from "react-icons/fa";
 import { useInputValue } from "../../hooks/useInputValue";
 import axios from 'axios';
-
+import { config } from "../../config";
+import { Context } from "../../Context";
 
 export const Asset = (props) => {
   const asset = props.asset;
   const name = useInputValue(asset.name);
   const value = useInputValue(asset.value);
   const [ isEditActive, setEditActive ] = useState(false);
+  const { authId, isAuth } = useContext(Context);
 
   const deleteAsset = () => {
-    axios.delete(`http://localhost:3000/asset/${asset._id}`).
+    axios.delete(`${config.host}${config.dev ? `:${config.port}`: ''}/asset/${asset._id}/${authId}`, {
+      headers: {
+        authorization: `Bearer ${isAuth}`
+      }
+  }).
       then( res => {
         if (!res.error) {
           props.setIsChanged(!props.isChanged);
@@ -21,9 +27,17 @@ export const Asset = (props) => {
   };
 
   const updateAsset = () => {
-    axios.patch(`http://localhost:3000/asset/${asset._id}`,{
-    name: name.value,
-    value: value.value}).
+    axios.patch(`${config.host}${config.dev ? `:${config.port}`: ''}/asset/${asset._id}`,{
+      name: name.value,
+      value: value.value,
+      auth: {
+        id: authId
+      }
+    }, {
+      headers: {
+        authorization: `Bearer ${isAuth}`
+      }
+  }).
       then( res => {
         if (!res.error) {
           props.setIsChanged(!props.isChanged);

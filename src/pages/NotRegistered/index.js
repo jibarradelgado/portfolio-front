@@ -4,6 +4,7 @@ import { UserForm } from '../../components/UserForm';
 import { Container } from './styles';
 import { Switch } from './styles';
 import axios from 'axios';
+import { config } from "../../config";
 
 export const NotRegistered = () => {
   const [ isLogin, setIsLogin ] = useState(true);
@@ -11,7 +12,7 @@ export const NotRegistered = () => {
 
   const handleSubmit = ({ email, password }) => {
     if (isLogin) {
-      axios.post(`http://localhost:3000/auth/login`, {
+      axios.post(`${config.host}${config.dev ? `:${config.port}`: ''}/auth/login`, {
       "username": email,
       "password": password
       }).then(res => {

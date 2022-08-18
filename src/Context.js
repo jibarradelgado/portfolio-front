@@ -1,10 +1,11 @@
 import React, { createContext, useState } from 'react';
 import { getUser, getAuth } from './auth';
+import { config } from './config';
 export const Context = createContext();
 
 const Provider = ({ children }) => {
   const [isAuth, setIsAuth] = useState(() => {
-    return window.sessionStorage.getItem('token');
+    return window.sessionStorage.getItem(config.constants.token);
   });
   const [userId, setUserId] = useState(() => {
     let user;
@@ -27,7 +28,7 @@ const Provider = ({ children }) => {
     authId,
     activateAuth: (token) => {
       setIsAuth(token);
-      window.sessionStorage.setItem('token', token);
+      window.sessionStorage.setItem(config.constants.token, token);
       const user = getUser(token);
       const authId = getAuth(token);
       setUserId(user);
@@ -36,7 +37,7 @@ const Provider = ({ children }) => {
 
     removeAuth: () => {
       setIsAuth('');
-      window.sessionStorage.removeItem('token');
+      window.sessionStorage.removeItem(config.constants.token);
       setUserId("");
       setAuthId("");
     }

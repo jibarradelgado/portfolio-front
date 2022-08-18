@@ -3,18 +3,25 @@ import { Container } from "./styles";
 import { useInputValue } from "../../hooks/useInputValue";
 import axios from 'axios';
 import { Context } from "../../Context";
+import { config } from "../../config";
 
 export const AssetForm = ({ showForm, setShowForm, isChanged, setIsChanged}) => {
   const name =  useInputValue('');
   const value = useInputValue(0);
-  const { userId } = useContext(Context);
+  const { userId, authId, isAuth } = useContext(Context);
 
   const handleSubmit = e => {
     e.preventDefault();
-    axios.post(`http://localhost:3000/asset`, {
+    axios.post(`${config.host}${config.dev ? `:${config.port}`: ''}/asset`, {
       user : userId,
       name : name.value,
-      value : value.value
+      value : value.value,
+      auth: {
+        id: authId
+      }}, {
+        headers: {
+          authorization: `Bearer ${isAuth}`
+        }
     }).then( res => {
       if (!res.error) {
         setIsChanged(!isChanged);

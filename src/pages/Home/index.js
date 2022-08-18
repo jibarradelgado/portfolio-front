@@ -6,6 +6,7 @@ import { AssetList } from '../../components/AssetList';
 import { Container } from './styles';
 import { Context } from '../../Context';
 import axios from 'axios';
+import { config } from "../../config";
 
 export const Home = () => {
   const [ assets, setAssets ] = useState([]);
@@ -13,7 +14,7 @@ export const Home = () => {
   const { userId, authId, isAuth } = useContext(Context);
 
   useEffect(function() {
-    axios.get(`http://localhost:3000/asset/${userId}/${authId}`, {
+    axios.get(`${config.host}${config.dev ? `:${config.port}`: ''}/asset/${userId}/${authId}`, {
       headers: { authorization: `Bearer ${isAuth}` }
     })
       .then(res => {
